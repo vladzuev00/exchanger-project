@@ -21,7 +21,7 @@ public final class ProducingTask extends ExchangingTask {
     protected void handle(final Queue<ExchangedObject> objects) {
         range(0, this.producedObjectCount)
                 .mapToObj(i -> this.produceObject())
-                .peek(object -> out.printf("%s is being produced", object))
+                .peek(object -> out.printf("%s is being produced\n", object))
                 .forEach(objects::add);
     }
 
