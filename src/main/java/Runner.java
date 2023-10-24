@@ -6,7 +6,7 @@ public final class Runner {
         final Exchanger<Queue<ExchangedObject>> exchanger = new Exchanger<>();
 
         final ExchangedObjectFactory objectFactory = new ExchangedObjectFactory();
-        final int producedObjectCount = 5;
+        final int producedObjectCount = 3;
         final ProducingTask producingTask = new ProducingTask(exchanger, objectFactory, producedObjectCount);
 
         final ConsumingTask consumingTask = new ConsumingTask(exchanger);
