@@ -15,5 +15,6 @@ public final class ConsumingTask extends ExchangingTask {
             final ExchangedObject consumedObject = objects.poll();
             out.printf("%s was consumed\n", consumedObject);
         }
+        out.println("-------------------------------------");
     }
 }
