@@ -2,7 +2,6 @@ import java.util.Queue;
 import java.util.concurrent.Exchanger;
 
 import static java.lang.System.out;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.IntStream.range;
 
 public final class ProducingTask extends ExchangingTask {
@@ -20,17 +19,8 @@ public final class ProducingTask extends ExchangingTask {
     @Override
     protected void handle(final Queue<ExchangedObject> objects) {
         range(0, this.producedObjectCount)
-                .mapToObj(i -> this.produceObject())
+                .mapToObj(i -> this.objectFactory.create())
                 .peek(object -> out.printf("%s is being produced\n", object))
                 .forEach(objects::add);
-    }
-
-    private ExchangedObject produceObject() {
-        try {
-            SECONDS.sleep(2);
-            return this.objectFactory.create();
-        } catch (final InterruptedException cause) {
-            throw new RuntimeException(cause);
-        }
     }
 }
